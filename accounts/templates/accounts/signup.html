@@ -1,0 +1,55 @@
+{%extends 'index.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+    <div class="parent-div">
+        <div class="card"   style="width: 22rem;"> 
+            <div class="card-header" style=" background-color: #0e4D92; color: #F5F5DC;">
+            <b>Sign up</b> 
+            </div>
+            <div class="card-body">
+                    <form method="POST">
+                        {%csrf_token%}
+                        <fieldset class="form-group">
+                            
+
+                            {{form|crispy}}
+                        </fieldset>
+                        <div>
+                            <button class="btn btn-primary btn-block mybuttons" type="submit">Sign up</button>     
+
+                        </div>
+                    </form>
+                        
+                        <div class="border-top pt-3">
+                            <small class="text-muted">
+                                Already have an account? <a class="ml-2" href="{%url 'login'%}">Login</a>
+
+                            </small>
+
+                        </div>
+            </div>
+        </div> 
+    </div>
+                
+{%endblock content%}
+
+
+       
+
+
+    
+
+
+
+
+
+
+
+
+
+

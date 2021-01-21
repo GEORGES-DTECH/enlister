@@ -1,0 +1,108 @@
+{%extends 'index.html'%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<a href="{%url 'transaction_create'%}" class="btn btn-primary btn-sm mybuttons ml-2">Add defaulter</a>
+
+<a href="{%url 'transaction_home'%}" class="btn btn-outline-info btn-sm mybuttons ml-2">Home</a>
+
+<a href="{%url 'reports_home'%}" class="btn btn-outline-primary btn-sm mybuttons ml-2">Return after search</a>
+<hr>
+<form action="{%url 'transaction_search'%}" method="get" style="display: inline-block;" class="ml-2">
+
+    <input type="text" name="q" placeholder="search by id/phone/name" class="box">
+    <b><input type="submit" name="" value="search"></b>
+
+</form>
+
+
+<hr>
+
+<b style="color: black;">DEFAULTERS LISTED</b>
+
+<div class="table-responsive ">
+    <table id="dataTable" class="table table-sm  table-light table-bordered  table-hover styleTable">
+
+
+
+        <thead class="table-light">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Id.no</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Amount defaulted</th>
+            <th scope="col">listing company</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                {%for transaction in object_list%}
+                <td><b>{{transaction.enlisting_date|date:'j b,y'}}</b></td>
+                <td><b>{{transaction.defaulters_name}}</b></td>
+                <td><b>{{transaction.defaulters_id_number}}</b></td>
+                <td><b>{{transaction.defaulters_phone}}</b></td>
+                <td><b>{{transaction.default_amount}}</b></td>
+                <td><b>{{transaction.enlister}}</b></td>
+                {%if transaction.enlister == user or user.username == 'root' %}
+                <td><a href="{%url 'transaction_update' transaction.id%}"
+                        class="btn btn-primary badge-pill btn-sm mybuttons ">Edit</a></td>
+                <td><a href="{%url 'transaction_delete' transaction.id%}"
+                        class="btn btn-outline-danger badge-pill btn-sm mybuttons ">Delete</a></td>
+                {%endif%}        
+            </tr>
+        </tbody>
+            {%endfor%}
+
+    </table>
+
+    {%if is_paginated%}
+
+    {%if page_obj.has_previous%}
+
+    <a href="?page=1" class="btn btn-outline-primary btn-small badge-pill mb-4">first </a>
+    <a href="?page={{page_obj.previous_page_number}}"
+        class="btn btn-outline-primary btn-small badge-pill  mb-4">previous</a>
+
+    {%endif%}
+
+    {%for num in page_obj.paginator.page_range%}
+
+    {%if page_obj.number == num%}
+
+    <a href="?page={{num}}" class="btn btn-outline-primary btn-small badge-pill  mb-4">{{num}}</a>
+    {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%} <a href="?page={{num}}"
+        class="btn btn-outline-primary btn-small badge-pill mb-4">{{num}}</a>
+
+        {%endif%}
+        {%endfor%}
+
+        {%if page_obj.has_next%}
+
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-primary btn-small badge-pill mb-4">next</a>
+        <a href="?page={{page_obj.paginator.num_pages}}"
+            class="btn btn-outline-primary btn-small badge-pill mb-4">last</a>
+
+        {%endif%}
+
+        {%endif%}
+</div>
+
+  <br>
+
+<hr>
+
+
+{%endblock%}

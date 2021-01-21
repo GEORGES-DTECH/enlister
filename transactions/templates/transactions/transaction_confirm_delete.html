@@ -1,0 +1,30 @@
+{%extends 'index.html'%}
+
+
+{%block content%}
+
+<br>
+<br>
+ <br>
+ <br>
+<div class="parent-div">
+    <div class="card" style="width: 22rem;">
+        <form method="POST" enctype="multipart/form-data" >
+            {%csrf_token%}
+            <fieldset class="form-group">
+                <legend class="border-bottom md-4"> <h3 style="color: black;">Delete defaulter!</h3> </legend>
+            <h3>Are you sure you want to delete defaulter ?</h3>
+            
+            </fieldset>
+            <div>
+                <button class="btn btn-outline-danger " type="submit">Yes,delete</button>
+                <a class="btn btn-outline-secondary " href="{%url 'reports_home'%}">cancel</a>
+
+            </div>
+        </form>
+
+
+
+    </div>
+</div>
+{%endblock content%}

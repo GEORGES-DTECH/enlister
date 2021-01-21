@@ -1,0 +1,219 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<link rel="manifest"  href="/manifest.json">
+
+  {% load pwa %}
+<head>
+  {% progressive_web_app_meta %}
+ 
+<meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+<title>Enlister</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<style>
+  *{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      }
+  .parent-div{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+
+
+  }
+
+  
+hr {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+
+
+  .box {
+  background: #ffff;
+  width: 190px;
+  height: 40px;
+
+  border: none;
+  outline: none;
+  padding: 0 25px;
+  border-radius: 25px 0 0 25px;
+  cursor: pointer;
+
+}
+
+
+.mybuttons:hover {
+  background: #008080;
+  color: white;
+  font-weight: bold;
+
+}
+
+input[type="submit"] {
+  background:  #0e4D92;
+  position: relative;
+  width: 105px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 0 25px 25px 0;
+  left: -5px;
+  color: white;
+}
+
+input[type="submit"]:hover {
+  background:  #0e4D92;
+  color: red;
+}
+
+.styleTable {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  height: 100px;
+   
+}
+
+.styleTable tbody tr{
+ 
+ color: #888888;
+
+}
+
+
+  .styleTable thead tr {
+  background-color: #0e4D92;
+  color: #F5F5DC;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+.styleTable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+
+
+  </style>
+
+  
+</head>
+<body style="background: #cccccc;" >
+
+  <header>
+  
+    <div class="container">
+      <nav class="navbar  navbar-expand-lg navbar-dark bg-dark fixed-top"> 
+      
+        
+
+
+        <a class="navbar-brand" href="{% url 'transaction_home'%}">
+      <img src="{% static 'images/home.png '%}" height="35" width="35" class="d-inline-block-alighn-top" />
+
+          <b style="color:   lightcyan; font-size: large;">Enlister</b> 
+          </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <hr style="background-color: lightcyan;">
+          {%if user.is_authenticated%}
+         
+          
+          <a class="nav-item nav-link mr-4 mylink" href=""
+          style="color:   lightcyan;font-size:large;">Welcome {{user.username}} </a>
+          
+          <hr style="background-color: lightcyan;">
+          
+          <a class="nav-item nav-link mr-4 mylink" href="{% url 'transaction_home'%}"
+                      style="color:   lightcyan;font-size:large;">Home </a>
+          <hr style="background-color: lightcyan;">
+ 
+         
+          <a class="nav-item nav-link mr-4 mylink" href=""
+            style="color:   lightcyan;font-size:large;"> </a>
+          
+            <hr style="background-color: lightcyan;">
+           
+
+         
+          <a class="nav-item nav-link mr-4 mylink" href="{% url 'reports_home'%}" style="color: lightcyan; font-size: large;">View defaulters</a>
+          <hr style="background-color: lightcyan;">
+          
+          <a  class="nav-item nav-link mr-4" href="{%url 'logout'%}" style="color: lightcyan; font-size:large">logout</a>
+          
+          {%else%}
+         
+          
+          
+          
+          <hr style="background-color: lightcyan;">
+          <a class="nav-item nav-link mr-4" href="{% url 'signup' %}" style="color:  lightcyan;font-size: large;" >Sign up</a>
+          <hr style="background-color: lightcyan;">
+          <a  class="nav-item nav-link mr-4" href="{% url 'login'%}" style="color:  lightcyan; font-size: large;">Login</a>
+          
+          
+          {%endif%}
+        
+
+        </div>
+        </div>
+
+
+
+        </nav>
+      </div>
+
+
+
+  </header>
+
+  <div class="container-fluid">
+    
+
+    {% block content %}
+    
+
+    
+    {% endblock content %}
+
+   
+  </div>
+ 
+<br>
+<br>
+ </footer>
+
+  <footer class="text-muted">
+    <div class="container text-center">
+      <p>© Enlister {% now "Y" %}</p>
+      
+      <p>developed by repotrans consultants,<img src="{% static 'images/my.png '%}" height="15" width="15" class="d-inline-block-alighn-top" /> </p>
+      <p>contact 0115209562</p>
+      
+    </div>
+  </footer>
+ 
+ 
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+
+
+
+</body>
+</html>

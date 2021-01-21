@@ -1,0 +1,85 @@
+{%extends 'index.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+
+<br>
+<br>
+<br>
+<br>
+<div class="parent-div">
+    <div class="card" style="width: 22rem;">
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b>ADD DEFAULTER</b>
+      </div>
+
+      <div class="card-body">
+
+        <form method="POST">
+          {%csrf_token%}
+          <fieldset class="form-group">
+
+
+            {{form|crispy}}
+          </fieldset>
+          <div>
+            <button class="btn btn-outline-primary btn-block mybuttons " type="submit">Submit defaulter</button> <br>
+            <a href="{%url 'reports_home'%}" class="btn btn-outline-primary  btn-block mybuttons">Cancel</a> <br>
+            
+            <a href="{%url 'transaction_create'%}" class="btn btn-primary btn-block mybuttons ">Add defaulter</a> <br>
+            
+            
+          </div>
+        </form>
+
+      </div>
+    </div>
+</div>
+
+<hr>
+
+{%for transaction in transactions|slice:":1"%}
+
+<div class="parent-div">
+
+  <div class="card" style="width: 22rem;" >
+      <div class="card-header" style="background-color: #0e4D92; color: #F5F5DC;">
+        <b style="float: left;">DEFAULTERS REPORTS</b>
+        
+      </div>
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Defulters enlisted </b> <b
+        style="float: right; color:grey;">{{transaction.defaulter_number}} </b></li>
+
+
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Total amount defaulted </b> <b
+        style="float: right; color:grey;">{{transaction.amount}}</b></li>
+        
+    <li class="list-group-item"> <b style="float: left; color: #00539cff;">Date today</b> <b
+        style="float: right; color:grey;">{{transaction.the_date_today|date:'j b,y'}}</b></li>
+        
+        <li class="list-group-item">
+          <a href="{%url 'reports_home'%}" class="btn btn-info btn-block mybuttons ">View defaulters</a>
+        </li>
+      {%if user.username == "root"%}
+      <li class="list-group-item">
+          <a href="{%url 'admin'%}" class="btn btn-outline-info btn-block mybuttons ">Admin</a>
+      </li>
+      {%endif%}
+
+    </div>
+</div>
+{%endfor%}
+
+
+
+<hr>
+
+{%endblock%}
+
+
+
+
+
+
+

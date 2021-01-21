@@ -1,0 +1,21 @@
+
+{
+    "name": "Enlister",
+    "short_name" : "Enlister",
+    "start_url": "./",
+    "scope" : "/",
+    "theme_color": "#cccccc",
+    "background_color": "#cccccc",
+    "display": "fullscreen",
+    "lang": "en-US",
+    
+    "icons": [
+        {
+            "src": "/static/images/my.png",
+            "sizes": "160x160",
+            "type": "image/png"
+        }
+        
+    ]
+    
+}
